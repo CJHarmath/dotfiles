@@ -8,6 +8,6 @@ cd ~
 git clone https://github.com/CJHarmath/dotfiles
 cd dotfile
 chmod +x ./symlink.sh
-./symlinks.sh
+./symlink.sh
 ```
 
