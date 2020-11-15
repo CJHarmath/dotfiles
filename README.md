@@ -1,6 +1,19 @@
 # dotfiles
 
-## Install
+# WSL Setup
+
+Cascadia font install
+```
+choco install cascadiacodepl -y
+```
+
+Update WSL settings (Ctrl+,) for Ubuntu
+
+```
+"fontFace": "Cascadia Code PL"
+```
+
+## Install dotfiles and vim plugins
 
 Clone the repo then run the symlink script
 ```
