@@ -1,0 +1,36 @@
+# Core Tools
+zsh
+starship
+atuin
+zoxide
+eza
+bat
+fd-find
+ripgrep
+git-delta
+neovim
+tmux
+zellij
+
+# Modern CLI Tools
+lazygit
+gitui
+bottom
+tokei
+hyperfine
+tealdeer
+glow
+
+# Development Tools
+git
+gh
+nodejs
+python3
+rust
+cargo
+golang
+
+# System Tools
+curl
+wget
+mosh

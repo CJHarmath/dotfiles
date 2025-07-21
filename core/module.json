@@ -1,0 +1,56 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "Essential terminal setup with modern tools",
+  "author": "dotfiles",
+  "components": [
+    {
+      "name": "shell",
+      "configs": ["zsh", "starship"],
+      "tools": ["zsh", "starship", "zinit"]
+    },
+    {
+      "name": "editor", 
+      "configs": ["nvim"],
+      "tools": ["neovim"]
+    },
+    {
+      "name": "terminal",
+      "configs": ["wezterm"],
+      "tools": ["wezterm"]
+    },
+    {
+      "name": "multiplexer",
+      "configs": ["zellij", "tmux"],
+      "tools": ["zellij", "tmux"]
+    },
+    {
+      "name": "modern-cli",
+      "configs": ["bat", "atuin"],
+      "tools": ["eza", "bat", "fd", "ripgrep", "delta", "zoxide", "atuin", "fzf"]
+    },
+    {
+      "name": "git",
+      "configs": ["gitconfig"],
+      "tools": ["git", "gh", "delta"]
+    }
+  ],
+  "dependencies": {
+    "macos": ["homebrew"],
+    "fedora": ["dnf"]
+  },
+  "configs": [
+    {"name": "zshrc", "source": "shell/zsh/.zshrc", "target": "~/.zshrc"},
+    {"name": "zshenv", "source": "shell/zsh/.zshenv", "target": "~/.zshenv"},
+    {"name": "zsh-conf.d", "source": "shell/zsh/conf.d", "target": "~/.config/zsh/conf.d"},
+    {"name": "starship", "source": "shell/starship/starship.toml", "target": "~/.config/starship.toml"},
+    {"name": "nvim", "source": "editor/nvim", "target": "~/.config/nvim"},
+    {"name": "wezterm", "source": "terminal/wezterm/wezterm.lua", "target": "~/.config/wezterm/wezterm.lua"},
+    {"name": "zellij-config", "source": "multiplexer/zellij/config.kdl", "target": "~/.config/zellij/config.kdl"},
+    {"name": "zellij-layouts", "source": "multiplexer/zellij/layouts.kdl", "target": "~/.config/zellij/layouts.kdl"},
+    {"name": "tmux", "source": "multiplexer/tmux/tmux.conf", "target": "~/.tmux.conf"},
+    {"name": "gitconfig", "source": "git/.gitconfig", "target": "~/.gitconfig"},
+    {"name": "bat", "source": "modern-cli/bat/config", "target": "~/.config/bat/config"},
+    {"name": "atuin", "source": "modern-cli/atuin/config.toml", "target": "~/.config/atuin/config.toml"}
+  ]
+}

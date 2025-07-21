@@ -1,0 +1,218 @@
+// ~/.config/zellij/layouts/dev.kdl
+// Development layout - Editor + Terminal + Server
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    
+    tab name="editor" focus=true {
+        pane {
+            command "nvim"
+            size "70%"
+        }
+        pane split_direction="vertical" {
+            pane {
+                name "terminal"
+                size "50%"
+            }
+            pane {
+                name "server"
+                command "npm"
+                args "run" "dev"
+            }
+        }
+    }
+    
+    tab name="git" {
+        pane {
+            command "lazygit"
+        }
+    }
+    
+    tab name="monitor" {
+        pane {
+            command "btm"
+        }
+    }
+}
+
+// ~/.config/zellij/layouts/code-review.kdl
+// Code review layout - Diffs + Notes + Terminal
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    
+    tab name="review" focus=true {
+        pane split_direction="vertical" {
+            pane {
+                name "diff"
+                command "git"
+                args "diff" "--staged"
+                size "60%"
+            }
+            pane {
+                name "notes"
+                command "nvim"
+                args "REVIEW_NOTES.md"
+            }
+        }
+        pane {
+            name "terminal"
+            size "30%"
+        }
+    }
+    
+    tab name="files" {
+        pane {
+            command "yazi"
+        }
+    }
+}
+
+// ~/.config/zellij/layouts/fullstack.kdl
+// Full-stack development - Frontend + Backend + DB
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    
+    tab name="frontend" focus=true {
+        pane {
+            name "editor"
+            command "nvim"
+            cwd "./frontend"
+            size "70%"
+        }
+        pane split_direction="vertical" {
+            pane {
+                name "dev-server"
+                command "npm"
+                args "run" "dev"
+                cwd "./frontend"
+            }
+            pane {
+                name "terminal"
+                cwd "./frontend"
+            }
+        }
+    }
+    
+    tab name="backend" {
+        pane {
+            name "editor"
+            command "nvim"
+            cwd "./backend"
+            size "70%"
+        }
+        pane split_direction="vertical" {
+            pane {
+                name "api-server"
+                command "npm"
+                args "run" "dev"
+                cwd "./backend"
+            }
+            pane {
+                name "terminal"
+                cwd "./backend"
+            }
+        }
+    }
+    
+    tab name="database" {
+        pane {
+            name "db-client"
+            command "psql"
+            size "70%"
+        }
+        pane {
+            name "logs"
+            command "tail"
+            args "-f" "/var/log/postgresql/postgresql.log"
+        }
+    }
+    
+    tab name="git" {
+        pane {
+            command "lazygit"
+        }
+    }
+}
+
+// ~/.config/zellij/layouts/minimal.kdl
+// Minimal layout - Just editor and terminal
+
+layout {
+    tab name="main" {
+        pane {
+            command "nvim"
+            size "80%"
+        }
+        pane {
+            size "20%"
+        }
+    }
+}
+
+// ~/.config/zellij/layouts/monitoring.kdl
+// System monitoring layout
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    
+    tab name="system" focus=true {
+        pane split_direction="vertical" {
+            pane {
+                name "resources"
+                command "btm"
+                size "50%"
+            }
+            pane {
+                name "network"
+                command "sudo"
+                args "bandwhich"
+            }
+        }
+        pane {
+            name "logs"
+            command "journalctl"
+            args "-f"
+            size "30%"
+        }
+    }
+    
+    tab name="docker" {
+        pane {
+            command "lazydocker"
+        }
+    }
+}

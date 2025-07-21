@@ -1,0 +1,49 @@
+# Shell-GPT Configuration
+# https://github.com/TheR1D/shell_gpt
+
+# Default model to use
+DEFAULT_MODEL=gpt-3.5-turbo
+
+# Default temperature (0.0 to 2.0)
+DEFAULT_TEMPERATURE=0.7
+
+# Default top_p (0.0 to 1.0)  
+DEFAULT_TOP_P=1.0
+
+# Request timeout in seconds
+REQUEST_TIMEOUT=60
+
+# Cache directory
+CACHE_PATH=~/.cache/shell_gpt
+
+# Enable/disable cache
+CACHE=true
+
+# Cache length in days
+CACHE_LENGTH=365
+
+# Role storage path
+ROLE_STORAGE_PATH=~/.config/shell_gpt/roles
+
+# Default execute mode for shell commands
+DEFAULT_EXECUTE=false
+
+# Disable streaming for better compatibility
+DISABLE_STREAMING=false
+
+# Chat mode settings
+CHAT_CACHE_PATH=~/.cache/shell_gpt/chat_cache
+CHAT_CACHE_LENGTH=365
+
+# API provider settings
+# Uncomment and set your preferred provider
+# OPENAI_API_KEY=your-openai-key
+# ANTHROPIC_API_KEY=your-anthropic-key
+
+# For local AI (Ollama)
+# OPENAI_API_BASE=http://localhost:11434/v1
+# OPENAI_API_KEY=ollama
+
+# Custom roles directory
+# SGPT will look for .toml files in this directory
+# Example: ~/.config/shell_gpt/roles/developer.toml

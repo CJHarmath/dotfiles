@@ -1,0 +1,184 @@
+# Global direnv configuration
+# This file contains helper functions and default behavior for direnv
+
+# Enable strict mode
+set -euo pipefail
+
+# Layout functions for common project types
+
+# Node.js projects with automatic nvmrc support
+layout_node() {
+    local node_version=${1:-""}
+    
+    if [[ -f .nvmrc ]]; then
+        node_version=$(cat .nvmrc)
+    elif [[ -f package.json ]] && command -v jq >/dev/null; then
+        node_version=$(jq -r '.engines.node // empty' package.json | sed 's/[^0-9.]//g')
+    fi
+    
+    if [[ -n "$node_version" ]] && command -v mise >/dev/null; then
+        mise use "node@$node_version"
+    fi
+    
+    # Add node_modules/.bin to PATH
+    if [[ -d node_modules/.bin ]]; then
+        PATH_add node_modules/.bin
+    fi
+}
+
+# Python projects with automatic activation
+layout_python() {
+    local python_version=${1:-""}
+    
+    if [[ -f .python-version ]]; then
+        python_version=$(cat .python-version)
+    elif [[ -f pyproject.toml ]] && command -v toml >/dev/null; then
+        python_version=$(toml get pyproject.toml tool.poetry.dependencies.python 2>/dev/null | sed 's/[^0-9.]//g' | head -1)
+    elif [[ -f runtime.txt ]]; then
+        python_version=$(cat runtime.txt | sed 's/python-//' | sed 's/[^0-9.]//g')
+    fi
+    
+    if [[ -n "$python_version" ]] && command -v mise >/dev/null; then
+        mise use "python@$python_version"
+    fi
+    
+    # Activate virtual environment if it exists
+    if [[ -f .venv/bin/activate ]]; then
+        source .venv/bin/activate
+    elif [[ -f venv/bin/activate ]]; then
+        source venv/bin/activate
+    fi
+}
+
+# Go projects
+layout_go() {
+    local go_version=${1:-""}
+    
+    if [[ -f go.mod ]] && [[ -z "$go_version" ]]; then
+        go_version=$(grep '^go ' go.mod | awk '{print $2}')
+    fi
+    
+    if [[ -n "$go_version" ]] && command -v mise >/dev/null; then
+        mise use "go@$go_version"
+    fi
+    
+    # Set GOPATH to project-local directory
+    export GOPATH="$PWD/.go"
+    PATH_add "$GOPATH/bin"
+}
+
+# Rust projects
+layout_rust() {
+    local rust_version=${1:-""}
+    
+    if [[ -f rust-toolchain.toml ]] && command -v toml >/dev/null; then
+        rust_version=$(toml get rust-toolchain.toml toolchain.channel 2>/dev/null || echo "")
+    elif [[ -f rust-toolchain ]]; then
+        rust_version=$(cat rust-toolchain)
+    fi
+    
+    if [[ -n "$rust_version" ]] && command -v mise >/dev/null; then
+        mise use "rust@$rust_version"
+    fi
+    
+    # Add cargo bin to PATH
+    if [[ -d ~/.cargo/bin ]]; then
+        PATH_add ~/.cargo/bin
+    fi
+}
+
+# Devbox integration
+layout_devbox() {
+    if [[ ! -f devbox.json ]]; then
+        log_error "No devbox.json found. Run 'devbox init' first."
+        return 1
+    fi
+    
+    # Generate direnv integration
+    eval "$(devbox generate direnv)"
+}
+
+# Docker Compose projects
+layout_docker() {
+    if [[ -f docker-compose.yml ]] || [[ -f compose.yml ]]; then
+        log_status "Docker Compose project detected"
+        
+        # Add useful aliases
+        export COMPOSE_FILE=${COMPOSE_FILE:-"docker-compose.yml"}
+        
+        # Function to run commands in containers
+        dc() { docker-compose "$@"; }
+        export -f dc
+    fi
+}
+
+# Generic project detection and setup
+layout_auto() {
+    log_status "Auto-detecting project type..."
+    
+    # Check for devbox first
+    if [[ -f devbox.json ]]; then
+        layout_devbox
+        return
+    fi
+    
+    # Check for different project types
+    if [[ -f package.json ]]; then
+        layout_node
+    fi
+    
+    if [[ -f requirements.txt ]] || [[ -f pyproject.toml ]] || [[ -f setup.py ]]; then
+        layout_python
+    fi
+    
+    if [[ -f go.mod ]]; then
+        layout_go
+    fi
+    
+    if [[ -f Cargo.toml ]]; then
+        layout_rust
+    fi
+    
+    if [[ -f docker-compose.yml ]] || [[ -f compose.yml ]]; then
+        layout_docker
+    fi
+    
+    # Load .env files
+    if [[ -f .env ]]; then
+        dotenv .env
+    fi
+    
+    if [[ -f .env.local ]]; then
+        dotenv .env.local
+    fi
+}
+
+# Helper functions
+
+# Create a local bin directory and add to PATH
+use_local_bin() {
+    mkdir -p bin
+    PATH_add bin
+}
+
+# Download and cache a binary
+cache_binary() {
+    local name=$1
+    local url=$2
+    local cache_dir="$HOME/.cache/direnv/bin"
+    local binary="$cache_dir/$name"
+    
+    if [[ ! -f "$binary" ]]; then
+        mkdir -p "$cache_dir"
+        log_status "Downloading $name..."
+        curl -fsSL "$url" -o "$binary"
+        chmod +x "$binary"
+    fi
+    
+    PATH_add "$cache_dir"
+}
+
+# Source additional configuration files
+if [[ -f ~/.config/direnv/direnvrc.local ]]; then
+    source ~/.config/direnv/direnvrc.local
+fi

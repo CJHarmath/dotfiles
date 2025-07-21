@@ -1,0 +1,53 @@
+{
+  "name": "devbox",
+  "version": "1.0.0",
+  "description": "Reproducible development environments with devbox, direnv, and task automation",
+  "author": "dotfiles",
+  "dependencies": {
+    "modules": ["core"],
+    "commands": ["curl", "bash"],
+    "optional": ["nix"]
+  },
+  "tools": [
+    {
+      "name": "devbox",
+      "description": "Portable, isolated development environments",
+      "url": "https://www.jetpack.io/devbox/",
+      "install_method": "script"
+    },
+    {
+      "name": "direnv",
+      "description": "Environment switcher for shell",
+      "url": "https://direnv.net/",
+      "install_method": "package_manager"
+    },
+    {
+      "name": "just",
+      "description": "Command runner and build tool",
+      "url": "https://github.com/casey/just",
+      "install_method": "package_manager"
+    },
+    {
+      "name": "mise",
+      "description": "Polyglot version management (replaces rtx)",
+      "url": "https://mise.jdx.dev/",
+      "install_method": "script"
+    }
+  ],
+  "configs": [
+    {
+      "name": "direnv",
+      "source": "direnv/direnvrc",
+      "target": "~/.config/direnv/direnvrc"
+    },
+    {
+      "name": "mise",
+      "source": "mise/config.toml",
+      "target": "~/.config/mise/config.toml"
+    }
+  ],
+  "shell_integrations": [
+    "direnv",
+    "mise"
+  ]
+}

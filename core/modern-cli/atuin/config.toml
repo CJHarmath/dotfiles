@@ -1,0 +1,22 @@
+# Atuin configuration
+sync_frequency = "1h"
+search_mode = "fuzzy"
+filter_mode = "global"
+style = "compact"
+inline_height = 25
+show_preview = true
+max_preview_height = 4
+show_help = true
+exit_mode = "return-query"
+
+[stats]
+common_subcommands = [
+    "cargo",
+    "git",
+    "go",
+    "npm",
+    "yarn",
+    "pnpm",
+    "docker",
+    "kubectl",
+]

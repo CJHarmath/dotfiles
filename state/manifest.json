@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-07-21T20:18:29Z",
+  "system": {
+    "os": "",
+    "arch": "",
+    "dotfiles_path": ""
+  },
+  "installed_modules": {
+    "core": {
+      "installed": true,
+      "version": "1.0.0",
+      "installed_at": "2025-07-21T20:01:19Z"
+    },
+    "workflow": {
+      "installed": true,
+      "version": "1.0.0",
+      "installed_at": "2025-07-21T20:18:29Z"
+    }
+  },
+  "tools": {},
+  "backups": [
+    {
+      "name": "20250721-153838-pre-install-core",
+      "created_at": "2025-07-21T19:38:38Z",
+      "type": "pre-install-core"
+    },
+    {
+      "name": "20250721-154210-pre-install-core",
+      "created_at": "2025-07-21T19:42:10Z",
+      "type": "pre-install-core"
+    },
+    {
+      "name": "20250721-154309-pre-install-core",
+      "created_at": "2025-07-21T19:43:09Z",
+      "type": "pre-install-core"
+    },
+    {
+      "name": "20250721-160113-pre-install-core",
+      "created_at": "2025-07-21T20:01:13Z",
+      "type": "pre-install-core"
+    },
+    {
+      "name": "20250721-161821-pre-install-core",
+      "created_at": "2025-07-21T20:18:22Z",
+      "type": "pre-install-core"
+    }
+  ]
+}

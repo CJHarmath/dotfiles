@@ -1,0 +1,108 @@
+# Aider Configuration
+# AI pair programming tool configuration
+
+# Model settings
+model: gpt-4-turbo-preview
+# Alternative models:
+# model: gpt-3.5-turbo
+# model: claude-3-sonnet-20240229
+# model: ollama/codellama:7b
+
+# Editor settings
+editor: nvim
+
+# Git settings
+auto-commits: true
+commit-prompt: "Generate a concise but descriptive commit message"
+attribute-author: true
+attribute-committer: false
+
+# Diff settings
+pretty: true
+stream: true
+
+# File settings
+encoding: utf-8
+
+# Performance settings
+map-tokens: 1024
+map-refresh: auto
+
+# Model-specific settings
+model-settings:
+  gpt-4:
+    max_tokens: 4096
+    temperature: 0.1
+  gpt-3.5-turbo:
+    max_tokens: 4096
+    temperature: 0.2
+  claude-3-sonnet-20240229:
+    max_tokens: 4096
+    temperature: 0.1
+
+# Local model settings (for Ollama)
+ollama:
+  host: http://localhost:11434
+  timeout: 300
+
+# API settings (set these as environment variables)
+# OPENAI_API_KEY=your-openai-key
+# ANTHROPIC_API_KEY=your-anthropic-key
+
+# Repository settings
+gitignore: true
+aiderignore: true
+
+# Chat settings
+show-model-warnings: true
+show-repo-map: true
+show-diffs: true
+
+# Voice settings (if using voice features)
+# voice-language: en
+
+# Advanced settings
+dark-mode: true
+light-mode: false
+
+# File patterns to include/exclude
+include:
+  - "*.py"
+  - "*.js"
+  - "*.ts"
+  - "*.jsx"
+  - "*.tsx"
+  - "*.go"
+  - "*.rs"
+  - "*.java"
+  - "*.c"
+  - "*.cpp"
+  - "*.h"
+  - "*.hpp"
+  - "*.sh"
+  - "*.bash"
+  - "*.zsh"
+  - "*.lua"
+  - "*.vim"
+  - "*.md"
+  - "*.yaml"
+  - "*.yml"
+  - "*.toml"
+  - "*.json"
+  - "*.html"
+  - "*.css"
+  - "*.scss"
+
+exclude:
+  - "node_modules/**"
+  - ".git/**"
+  - "__pycache__/**"
+  - "*.pyc"
+  - ".env"
+  - ".env.*"
+  - "dist/**"
+  - "build/**"
+  - "target/**"
+  - ".next/**"
+  - ".nuxt/**"
+  - "vendor/**"

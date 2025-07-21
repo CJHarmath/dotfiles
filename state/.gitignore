@@ -1,0 +1,9 @@
+# Ignore backups and logs but track structure
+backups/*
+logs/*
+!backups/.gitkeep
+!logs/.gitkeep
+
+# Keep manifest files
+!manifest.json
+!symlinks.json

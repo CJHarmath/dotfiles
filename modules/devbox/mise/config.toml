@@ -1,0 +1,170 @@
+# Mise (formerly rtx) configuration
+# Global settings for polyglot version management
+
+[settings]
+# Automatically install missing tools
+auto_install = true
+
+# Enable experimental features
+experimental = true
+
+# Use legacy version files (.nvmrc, .ruby-version, etc.)
+legacy_version_file = true
+
+# Automatically activate environments
+activate_aggressive = true
+
+# Show version in prompt (if using mise prompt integration)
+status.show_env = true
+status.show_tools = true
+
+# Plugin settings
+[plugins]
+# Automatically install plugins for tools
+auto_install = true
+
+# Trust all plugins (be careful with this in production)
+trusted = true
+
+# Tool-specific settings
+[tools]
+# Node.js settings
+node = { auto_install = true }
+
+# Python settings  
+python = { auto_install = true }
+
+# Go settings
+go = { auto_install = true }
+
+# Rust settings
+rust = { auto_install = true }
+
+# Java settings
+java = { auto_install = true }
+
+# Ruby settings
+ruby = { auto_install = true }
+
+# Default versions (override these in project-specific .mise.toml files)
+[env]
+# Set common environment variables
+NODE_ENV = "development"
+PYTHONDONTWRITEBYTECODE = "1"
+GOTELEMETRY = "off"
+
+# Common aliases
+[alias]
+# Node.js aliases
+node.lts = "lts"
+node.latest = "latest"
+
+# Python aliases  
+python.3 = "3.12"
+python.latest = "3.12"
+
+# Go aliases
+go.latest = "1.22"
+
+# Rust aliases
+rust.stable = "stable"
+rust.latest = "stable"
+
+# Task integration (if using mise tasks)
+[tasks]
+# Common development tasks
+
+# Install project dependencies
+install = """
+if [ -f package.json ]; then
+  npm install
+fi
+if [ -f requirements.txt ]; then
+  pip install -r requirements.txt
+fi
+if [ -f go.mod ]; then
+  go mod tidy
+fi
+if [ -f Cargo.toml ]; then
+  cargo fetch
+fi
+"""
+
+# Run tests
+test = """
+if [ -f package.json ] && jq -e '.scripts.test' package.json > /dev/null; then
+  npm test
+elif [ -f pytest.ini ] || [ -f pyproject.toml ]; then
+  python -m pytest
+elif [ -f go.mod ]; then
+  go test ./...
+elif [ -f Cargo.toml ]; then
+  cargo test
+else
+  echo "No test command found"
+fi
+"""
+
+# Format code
+format = """
+if [ -f package.json ] && jq -e '.scripts.format' package.json > /dev/null; then
+  npm run format
+elif command -v black > /dev/null && find . -name "*.py" | head -1 | grep -q .; then
+  black .
+elif [ -f go.mod ]; then
+  go fmt ./...
+elif [ -f Cargo.toml ]; then
+  cargo fmt
+else
+  echo "No format command found"
+fi
+"""
+
+# Lint code
+lint = """
+if [ -f package.json ] && jq -e '.scripts.lint' package.json > /dev/null; then
+  npm run lint
+elif command -v flake8 > /dev/null && find . -name "*.py" | head -1 | grep -q .; then
+  flake8 .
+elif [ -f go.mod ]; then
+  go vet ./...
+elif [ -f Cargo.toml ]; then
+  cargo clippy
+else
+  echo "No lint command found"
+fi
+"""
+
+# Development server
+dev = """
+if [ -f package.json ] && jq -e '.scripts.dev' package.json > /dev/null; then
+  npm run dev
+elif [ -f package.json ] && jq -e '.scripts.start' package.json > /dev/null; then
+  npm start
+elif [ -f manage.py ]; then
+  python manage.py runserver
+elif [ -f app.py ] || [ -f main.py ]; then
+  python -m flask run || python main.py || python app.py
+elif [ -f go.mod ]; then
+  go run .
+elif [ -f Cargo.toml ]; then
+  cargo run
+else
+  echo "No dev server command found"
+fi
+"""
+
+# Build project
+build = """
+if [ -f package.json ] && jq -e '.scripts.build' package.json > /dev/null; then
+  npm run build
+elif [ -f go.mod ]; then
+  go build .
+elif [ -f Cargo.toml ]; then
+  cargo build --release
+elif [ -f setup.py ]; then
+  python setup.py build
+else
+  echo "No build command found"
+fi
+"""

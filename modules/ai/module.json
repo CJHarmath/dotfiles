@@ -1,0 +1,56 @@
+{
+  "name": "ai",
+  "version": "1.0.0",
+  "description": "AI-powered development tools and integrations",
+  "author": "dotfiles",
+  "dependencies": {
+    "modules": ["core"],
+    "commands": ["curl", "bash", "python3"],
+    "optional": ["node", "go"]
+  },
+  "note": "AI tools change rapidly. This module provides a framework for integrating AI tools without being tied to specific models or services.",
+  "categories": [
+    {
+      "name": "shell",
+      "description": "AI assistants for command line",
+      "tools": ["shell-gpt", "ai-cli", "gh-copilot"]
+    },
+    {
+      "name": "coding",
+      "description": "AI coding assistants",
+      "tools": ["aider", "cursor", "continue"]
+    },
+    {
+      "name": "local",
+      "description": "Local AI models and runners",
+      "tools": ["ollama", "llamafile", "lm-studio"]
+    },
+    {
+      "name": "workflows",
+      "description": "AI-powered workflow automation",
+      "tools": ["fabric", "auto-gpt"]
+    }
+  ],
+  "configs": [
+    {
+      "name": "shell-gpt",
+      "source": "shell-gpt/sgptrc",
+      "target": "~/.config/shell_gpt/.sgptrc"
+    },
+    {
+      "name": "aider",
+      "source": "aider/aider.conf.yml",
+      "target": "~/.aider.conf.yml"
+    },
+    {
+      "name": "ollama",
+      "source": "ollama/modelfile-templates/",
+      "target": "~/.dotfiles/ai-templates/"
+    }
+  ],
+  "environment": {
+    "AI_PROVIDER": "auto",
+    "AI_FALLBACK": "ollama",
+    "AI_CONFIG_DIR": "~/.config/ai-tools"
+  }
+}

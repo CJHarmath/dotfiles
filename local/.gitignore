@@ -1,0 +1,4 @@
+# Ignore everything in local directory
+*
+# But keep this file
+!.gitignore

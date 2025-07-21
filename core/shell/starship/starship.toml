@@ -1,0 +1,256 @@
+# ~/.config/starship.toml
+# A prompt that makes you look like you know what you're doing
+
+# Get the status right away
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$nodejs\
+$rust\
+$golang\
+$python\
+$docker_context\
+$time\
+$line_break\
+$character"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol in the prompt
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vicmd_symbol = "[⮜](bold green)"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[username]
+style_user = "bold cyan"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "[@$hostname](bold blue) "
+disabled = false
+
+[directory]
+format = "in [$path]($style)[$read_only]($read_only_style) "
+style = "bold purple"
+read_only = " 󰌾"
+read_only_style = "red"
+truncation_length = 4
+truncate_to_repo = true
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+style = "bold yellow"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+conflicted = "🏳"
+up_to_date = ""
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = " "
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "󰖷 "
+deleted = " "
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+disabled = false
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+added_style = "bold green"
+deleted_style = "bold red"
+
+[nodejs]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "bold green"
+disabled = false
+not_capable_style = "bold red"
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+[rust]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "bold red"
+
+[golang]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "bold cyan"
+
+[python]
+symbol = " "
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_version_name = true
+python_binary = ["python3", "python"]
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "__init__.py", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+style = "bold blue"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
+
+[time]
+disabled = false
+format = '[$time]($style) '
+style = "bold bright-black"
+time_format = "%H:%M"
+
+[fill]
+symbol = " "
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration](bold yellow)"
+show_milliseconds = false
+disabled = false
+show_notifications = true
+min_time_to_notify = 45_000
+
+[memory_usage]
+symbol = "󰍛 "
+format = "via $symbol[$ram( | $swap)]($style) "
+threshold = 80
+style = "bold dimmed white"
+disabled = true
+
+[battery]
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰁽 "
+empty_symbol = "󰂎 "
+format = "[$symbol$percentage]($style) "
+disabled = false
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+[[battery.display]]
+threshold = 100
+style = "bold green"
+
+[buf]
+symbol = " "
+format = "with [$symbol($version )]($style)"
+
+[c]
+symbol = " "
+format = "via [$symbol($version(-$name) )]($style)"
+
+[cmake]
+format = "via [$symbol($version )]($style)"
+
+[dart]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[elixir]
+symbol = " "
+format = 'via [$symbol($version \(OTP $otp_version\) )]($style)'
+
+[elm]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[haskell]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[java]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[julia]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[kotlin]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[lua]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[nim]
+symbol = "󰆥 "
+format = "via [$symbol($version )]($style)"
+
+[nix_shell]
+symbol = " "
+format = 'via [$symbol$state( \($name\))]($style) '
+
+[perl]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[php]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[ruby]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[scala]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[swift]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[zig]
+symbol = " "
+format = "via [$symbol($version )]($style)"

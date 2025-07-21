@@ -1,0 +1,36 @@
+# Core Module Packages
+# Essential tools for a modern terminal setup
+
+# Terminal Emulator
+cask "wezterm"
+
+# Shell and Prompt
+brew "zsh"
+brew "starship"
+
+# Editor
+brew "neovim"
+
+# Multiplexers
+brew "tmux"
+brew "zellij"
+
+# Modern CLI Tools (replacements for standard tools)
+brew "eza"        # better ls
+brew "bat"        # better cat
+brew "fd"         # better find
+brew "ripgrep"    # better grep
+brew "delta"      # better diff
+brew "zoxide"     # smart cd
+brew "atuin"      # better history
+brew "fzf"        # fuzzy finder
+
+# Essential Dev Tools
+brew "git"
+brew "gh"         # GitHub CLI
+brew "jq"         # JSON processor
+
+# Optional but recommended
+brew "tree"       # directory tree
+brew "htop"       # better top
+brew "tealdeer"   # simplified man pages (tldr replacement)
