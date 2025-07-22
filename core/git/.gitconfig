@@ -1,0 +1,44 @@
+[core]
+    editor = nvim
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+    syntax-theme = Catppuccin-mocha
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    lg = log --oneline --graph --decorate
+
+[push]
+    default = current
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
+# Include local config for personal settings
+# Create ~/.config/git/local.conf with:
+# [user]
+#     name = Your Name
+#     email = your.email@example.com
+[include]
+    path = ~/.config/git/local.conf

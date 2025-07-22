@@ -1,0 +1,116 @@
+# Dotfiles Git Ignore
+
+# Local overrides and personal configs
+local/
+*.local
+*.local.*
+local.lua
+local.zsh
+
+# State and tracking files
+state/manifest.json
+state/symlinks.json
+state/backups/
+state/logs/
+state/*-install-record.json
+
+# Backup directories
+.dotfiles-backups/
+*.backup
+*.backup.*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.nova/
+
+# Vim/Neovim
+Session.vim
+.netrwhist
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Package manager files
+node_modules/
+.npm
+.yarn
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+
+# Rust
+target/
+Cargo.lock
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+vendor/
+
+# Tool caches
+.cache/
+.zinit/
+.zcompdump*
+.zsh_history
+
+# Compiled files
+*.o
+*.a
+*.out
+
+# Archives
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa*
+id_ed25519*
+.netrc
+.authinfo
+# Personal git config
+.gitconfig.local
+.config/git/local.conf
+
+# Module-specific ignores
+modules/*/test/
+modules/*/tmp/
+modules/*/.cache/
+
+# Keep these
+!.gitkeep
+!state/.gitignore
+!local/.gitignore
