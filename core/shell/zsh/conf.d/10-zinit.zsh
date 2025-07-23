@@ -26,7 +26,14 @@ zinit wait lucid light-mode for \
     zsh-users/zsh-completions
 
 # History substring search
-zinit ice wait lucid atload'bindkey "^[[A" history-substring-search-up; bindkey "^[[B" history-substring-search-down'
+# Load the plugin and define the widgets
+zinit ice wait lucid atload'
+  zle -N history-substring-search-up
+  zle -N history-substring-search-down
+  bindkey "^[[A" history-substring-search-up
+  bindkey "^[[B" history-substring-search-down
+  bindkey "^P" history-substring-search-up
+  bindkey "^N" history-substring-search-down'
 zinit light zsh-users/zsh-history-substring-search
 
 # Load Oh My Zsh libraries (without the bloat)

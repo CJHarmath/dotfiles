@@ -9,8 +9,9 @@ bindkey -e
 bindkey '^W' backward-kill-word
 
 # Better history search
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+# These are now bound in 10-zinit.zsh after the plugin loads
+# bindkey '^P' history-substring-search-up
+# bindkey '^N' history-substring-search-down
 
 # Beginning/end of line
 bindkey '^A' beginning-of-line

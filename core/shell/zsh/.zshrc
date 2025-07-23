@@ -34,3 +34,6 @@ if [[ -d "$ZSH_CONFIG_DIR/modules" ]]; then
     source "$module_conf"
   done
 fi
+
+# CJ custom
+alias keychain='security unlock-keychain ~/Library/Keychains/login.keychain-db'

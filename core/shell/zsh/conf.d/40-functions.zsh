@@ -64,6 +64,8 @@ backup() {
 }
 
 # Git worktree helper
+# Unset the alias first to avoid conflicts
+unalias gwt 2>/dev/null || true
 gwt() {
   local cmd=$1
   shift
@@ -96,6 +98,8 @@ gwt() {
 }
 
 # Quick HTTP server with directory listing
+# Unset the alias first to avoid conflicts
+unalias serve 2>/dev/null || true
 serve() {
   local port="${1:-8000}"
   if command -v python3 >/dev/null 2>&1; then
