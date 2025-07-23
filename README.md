@@ -147,6 +147,11 @@ The system automatically creates backups before any changes:
 - Confirmation prompts for destructive operations
 - Non-destructive installation process
 
+## 📚 Documentation
+
+For detailed walkthroughs of each feature and configuration:
+- **[Features Documentation](docs/features.md)** - Comprehensive guide to all configured features
+
 ## 🔧 Core Module Details
 
 The core module provides a solid foundation with modern alternatives to standard Unix tools:
