@@ -149,8 +149,8 @@ The system automatically creates backups before any changes:
 
 ## 📚 Documentation
 
-For detailed walkthroughs of each feature and configuration:
-- **[Features Documentation](docs/features.md)** - Comprehensive guide to all configured features
+- **[🎓 Tutorial](docs/tutorial.md)** - Start here! Learn the power of modern terminal tools through real examples
+- **[📖 Features Documentation](docs/features.md)** - Comprehensive guide to all configured features
 
 ## 🔧 Core Module Details
 
