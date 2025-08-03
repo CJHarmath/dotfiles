@@ -10,33 +10,24 @@ return {
     enabled = vim.fn.executable("node") == 1,
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
+        suggestion = { 
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<Tab>",
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        panel = { enabled = true },
       })
     end,
   },
   
-  -- Copilot integration with nvim-cmp
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = "copilot.lua",
-    opts = {},
-    config = function(_, opts)
-      local copilot_cmp = require("copilot_cmp")
-      copilot_cmp.setup(opts)
-      -- Add copilot as a source for nvim-cmp
-      LazyVim.on_load("nvim-cmp", function()
-        require("cmp").setup.buffer({
-          sources = {
-            { name = "copilot" },
-            { name = "nvim_lsp" },
-            { name = "buffer" },
-            { name = "path" },
-          },
-        })
-      end)
-    end,
-  },
+  -- Copilot integration with blink.cmp
+  -- Note: copilot-cmp is not compatible with blink.cmp
+  -- Copilot suggestions will work directly through copilot.lua
   
   -- Codeium (free alternative to Copilot)
   -- Uncomment to use Codeium instead of Copilot

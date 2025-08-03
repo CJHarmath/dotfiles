@@ -33,6 +33,10 @@ command -v rg >/dev/null 2>&1 && {
   alias grep='rg'
 }
 
+command -v zoxide >/dev/null 2>&1 && {
+  alias zq='zoxide query -i'  # Interactive directory search
+}
+
 # Git shortcuts
 alias g='git'
 alias ga='git add'

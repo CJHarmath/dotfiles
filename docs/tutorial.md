@@ -87,8 +87,8 @@ cd ~/Development/company/frontend/src/components/DashboardWidget
 z dashboard
 # Boom! You're there. It learns from your habits.
 
-# Or use interactive selection
-zi  # Shows your frecent directories
+# Or use interactive selection (if zoxide is installed)
+zq  # Shows your frecent directories interactively
 ```
 
 ### Scenario 4: Command History Magic
